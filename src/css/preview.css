@@ -1,5 +1,6 @@
-.preview__link:link,
-.preview__link:visited {
+/* .preview__link:link,
+.preview__link:visited { */
+.preview__link {
     display: flex;
     align-items: center;
     padding: 1.5rem 3.25rem;
