@@ -1,16 +1,6 @@
-async function getData<U>(
-    url: string,
-    errorMessage: string = "Can not get some data"
-): Promise<U> {
-    const response = await fetch(url);
+import { BASE_URL, getData } from "../utils/getData";
 
-    if (!response.ok) throw new Error(errorMessage);
-
-    return await response.json();
-}
-const BASE_URL = "https://forkify-api.jonas.io/api/v2/recipes";
-
-export type Recipe = {
+export type RecipeListData = {
     publisher: string;
     image_url: string;
     title: string;
@@ -21,12 +11,12 @@ type RecipeResults = {
     status: "success" | "error";
     results: number;
     data: {
-        recipes: Recipe[];
+        recipes: RecipeListData[];
     };
 };
 
 type SearchResultsState = {
-    recipes: Recipe[] | null;
+    recipes: RecipeListData[] | null;
     isLoading: boolean;
     isError: boolean;
     errorMessage: string | null;

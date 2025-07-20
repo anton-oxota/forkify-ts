@@ -1,9 +1,10 @@
 // import icons from "imgs/icons.svg";
 import Components from "./Components";
-import type { Recipe } from "../modules/searchResultModule";
+import type { RecipeListData } from "../modules/searchResultModule";
+import { getURLRecipeId } from "../utils/url";
 
 class SearchResultsView {
-    private recipesListContainer = document.querySelector(
+    public recipesListContainer = document.querySelector(
         ".results"
     ) as HTMLDivElement;
 
@@ -13,12 +14,14 @@ class SearchResultsView {
 
     public searchForm = document.querySelector(".search") as HTMLFormElement;
 
-    private createResipeListElement(data: Recipe) {
+    private createResipeListElement(data: RecipeListData, isActive: boolean) {
         const { id, image_url, publisher, title } = data;
 
         return `
             <li class="preview">
-                <a class="preview__link" href="" data-id="${id}">
+                <a class="preview__link 
+                 ${isActive ? "preview__link--active" : ""}
+                 " data-id="${id}">
                     <figure class="preview__fig">
                         <img src="${image_url}" alt="Test" />
                     </figure>
@@ -29,6 +32,32 @@ class SearchResultsView {
                 </a>
             </li>
         `;
+    }
+
+    public renderResults(
+        data: RecipeListData[],
+        isClearRecipeContainer = true
+    ) {
+        // Clear containers
+        this.recipesListContainer.innerHTML = "";
+
+        if (isClearRecipeContainer) this.clearRecipeContainer();
+
+        if (!data.length)
+            this.recipeContainer.innerHTML = Components.error(
+                "No recipes found for your query. Please try again!"
+            );
+
+        // Get Recipe Id
+        const recipeId = getURLRecipeId();
+
+        // Render Recipes
+        data.forEach((recipe) => {
+            this.recipesListContainer?.insertAdjacentHTML(
+                "beforeend",
+                this.createResipeListElement(recipe, recipe.id === recipeId)
+            );
+        });
     }
 
     private clearRecipeContainer() {
@@ -50,25 +79,6 @@ class SearchResultsView {
         this.recipesListContainer.innerHTML = "";
         container.innerHTML = "";
         container.innerHTML = Components.error(errorMessage);
-    }
-
-    public renderResults(data: Recipe[]) {
-        // Clear containers
-        this.recipesListContainer.innerHTML = "";
-        this.clearRecipeContainer();
-
-        if (!data.length)
-            this.recipeContainer.innerHTML = Components.error(
-                "No recipes found for your query. Please try again!"
-            );
-
-        // Render Recipes
-        data.forEach((recipe) => {
-            this.recipesListContainer?.insertAdjacentHTML(
-                "beforeend",
-                this.createResipeListElement(recipe)
-            );
-        });
     }
 }
 

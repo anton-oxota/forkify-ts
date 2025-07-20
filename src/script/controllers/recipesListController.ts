@@ -4,7 +4,10 @@ import {
 } from "../modules/searchResultModule";
 import SearchResultsView from "../views/SearchResultsView";
 
-export default async function recepiesListController(searchValue: string) {
+export default async function recipesListController(
+    searchValue: string,
+    isClearRecipeContainer = true
+) {
     try {
         // Loading
         SearchResultsView.renderLoading();
@@ -16,7 +19,7 @@ export default async function recepiesListController(searchValue: string) {
 
         if (recipes) {
             // Rendering
-            SearchResultsView.renderResults(recipes);
+            SearchResultsView.renderResults(recipes, isClearRecipeContainer);
 
             // Create URL
             const url = new URL(window.location.href);

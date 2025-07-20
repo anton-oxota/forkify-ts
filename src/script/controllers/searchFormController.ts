@@ -1,5 +1,5 @@
 import SearchResultsView from "../views/SearchResultsView";
-import recepiesListController from "./recepiesListController";
+import recipesListController from "./recipesListController";
 
 export default async function searchResultsController() {
     const searchForm = SearchResultsView.searchForm;
@@ -12,6 +12,6 @@ export default async function searchResultsController() {
 
         if (!searchValue) return;
 
-        recepiesListController(searchValue);
+        recipesListController(searchValue);
     });
 }
