@@ -2,7 +2,7 @@ import type { Recipe } from "../modules/recipeModule";
 import Components from "./Components";
 
 class RecipeView {
-    private recipeContainer = document.querySelector(
+    public recipeContainer = document.querySelector(
         ".recipe"
     ) as HTMLDivElement;
 
@@ -17,7 +17,11 @@ class RecipeView {
         `;
     }
 
-    private createRecipeDetailsElement({ cooking_time, servings }: Recipe) {
+    private createRecipeDetailsElement({
+        cooking_time,
+        servings,
+        isBookmarked,
+    }: Recipe) {
         return `
             <div class="recipe__details">
                 <div class="recipe__info">
@@ -53,9 +57,11 @@ class RecipeView {
                         <use href="imgs/icons.svg#icon-user"></use>
                     </svg>
                 </div>
-                <button class="btn--round">
+                <button class="btn--round btn-bookmark">
                     <svg class="">
-                        <use href="imgs/icons.svg#icon-bookmark-fill"></use>
+                        <use href="imgs/icons.svg#icon-bookmark${
+                            isBookmarked ? "-fill" : ""
+                        }"></use>
                     </svg>
                 </button>
             </div>
@@ -109,8 +115,6 @@ class RecipeView {
     }
 
     public renderError(errorMessage: string) {
-        // this.recipeContainer.innerHTML = "SOme erorr";
-        console.log(errorMessage);
         this.recipeContainer.innerHTML = Components.error(errorMessage);
     }
 }

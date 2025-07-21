@@ -1,3 +1,5 @@
+import type { RecipeListData } from "../modules/searchResultModule";
+
 class Components {
     public spinner() {
         return `
@@ -33,6 +35,26 @@ class Components {
                 <p>${text}</p>
             </div>
         `;
+    }
+
+    public createResipeListElement(data: RecipeListData, isActive = false) {
+        const { id, image_url, publisher, title } = data;
+
+        return `
+                <li class="preview">
+                    <a class="preview__link 
+                     ${isActive ? "preview__link--active" : ""}
+                     " data-id="${id}">
+                        <figure class="preview__fig">
+                            <img src="${image_url}" alt="Test" />
+                        </figure>
+                        <div class="preview__data">
+                            <h4 class="preview__title">${title}</h4>
+                            <p class="preview__publisher">${publisher}</p>
+                        </div>
+                    </a>
+                </li>
+            `;
     }
 }
 

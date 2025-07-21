@@ -14,7 +14,7 @@ class SearchResultsView {
 
     public searchForm = document.querySelector(".search") as HTMLFormElement;
 
-    private createResipeListElement(data: RecipeListData, isActive: boolean) {
+    private createResipeListElement(data: RecipeListData, isActive = false) {
         const { id, image_url, publisher, title } = data;
 
         return `
