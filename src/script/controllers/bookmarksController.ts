@@ -1,6 +1,5 @@
 import { bookmarksState, toggleBookmark } from "../modules/bookmarksModule";
 import { recipeState } from "../modules/recipeModule";
-import BookmarksView from "../views/BookmarksView";
 import RecipeView from "../views/RecipeView";
 import renderBookmarksController from "./renderBookmarksController";
 import renderRecipeController from "./renderRecipeController";

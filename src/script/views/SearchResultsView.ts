@@ -1,7 +1,6 @@
 // import icons from "imgs/icons.svg";
 import Components from "./Components";
 import type { RecipeListData } from "../modules/searchResultModule";
-import { getURLRecipeId } from "../utils/url";
 
 class SearchResultsView {
     public recipesListContainer = document.querySelector(
@@ -13,26 +12,6 @@ class SearchResultsView {
     ) as HTMLDivElement;
 
     public searchForm = document.querySelector(".search") as HTMLFormElement;
-
-    private createResipeListElement(data: RecipeListData) {
-        const { id, image_url, publisher, title, isActive } = data;
-
-        return `
-            <li class="preview">
-                <a class="preview__link 
-                 ${isActive ? "preview__link--active" : ""}
-                 " data-id="${id}">
-                    <figure class="preview__fig">
-                        <img src="${image_url}" alt="Test" />
-                    </figure>
-                    <div class="preview__data">
-                        <h4 class="preview__title">${title}</h4>
-                        <p class="preview__publisher">${publisher}</p>
-                    </div>
-                </a>
-            </li>
-        `;
-    }
 
     public renderResults(
         data: RecipeListData[],
@@ -48,15 +27,11 @@ class SearchResultsView {
                 "No recipes found for your query. Please try again!"
             );
 
-        // Get Recipe Id
-        // const recipeId = getURLRecipeId();
-
         // Render Recipes
         data.forEach((recipe) => {
             this.recipesListContainer?.insertAdjacentHTML(
                 "beforeend",
                 Components.createResipeListElement(recipe)
-                // this.createResipeListElement(recipe)
             );
         });
     }
