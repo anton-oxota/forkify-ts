@@ -10,6 +10,7 @@ export type Recipe = {
     cooking_time: number;
     id: string;
     isBookmarked?: boolean;
+    isActive?: boolean;
 };
 
 type RecipeIngredient = {

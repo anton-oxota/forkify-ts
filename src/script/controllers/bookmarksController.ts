@@ -2,6 +2,8 @@ import { bookmarksState, toggleBookmark } from "../modules/bookmarksModule";
 import { recipeState } from "../modules/recipeModule";
 import BookmarksView from "../views/BookmarksView";
 import RecipeView from "../views/RecipeView";
+import renderBookmarksController from "./renderBookmarksController";
+import renderRecipeController from "./renderRecipeController";
 
 export default function bookmarksController() {
     const recipeContainer = RecipeView.recipeContainer;
@@ -19,18 +21,12 @@ export default function bookmarksController() {
         if (recipeState.recipe) toggleBookmark(recipeState.recipe);
 
         // Render bookmarks
-        BookmarksView.renderBookmarks(bookmarksState.bookmarks);
+        renderBookmarksController(bookmarksState.bookmarks);
 
+        // Render recipe
         const { recipe } = recipeState;
         if (!recipe) return;
 
-        // Check is bookmarked
-        const isBookmarked = !!bookmarksState.bookmarks.some(
-            (bookmarkedRecipe) => bookmarkedRecipe.id === recipe.id
-        );
-        recipe.isBookmarked = isBookmarked;
-
-        // Rerender recipe
-        RecipeView.renderRecipe(recipe);
+        renderRecipeController(recipe);
     });
 }

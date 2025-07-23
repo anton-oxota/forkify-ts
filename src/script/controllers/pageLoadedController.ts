@@ -1,7 +1,7 @@
 import { bookmarksState, getLocalBookmarks } from "../modules/bookmarksModule";
-import BookmarksView from "../views/BookmarksView";
 import recipeController from "./recipeController";
 import recipesListController from "./recipesListController";
+import renderBookmarksController from "./renderBookmarksController";
 
 export default async function pageLoadedController() {
     // Get url
@@ -21,5 +21,5 @@ export default async function pageLoadedController() {
     bookmarksState.bookmarks = localBookmarks;
 
     // Render bookmarks
-    BookmarksView.renderBookmarks(bookmarksState.bookmarks);
+    renderBookmarksController(localBookmarks);
 }

@@ -3,6 +3,7 @@ import {
     searchResultsState,
 } from "../modules/searchResultModule";
 import SearchResultsView from "../views/SearchResultsView";
+import renderResultsController from "./renderResultsController";
 
 export default async function recipesListController(
     searchValue: string,
@@ -19,7 +20,7 @@ export default async function recipesListController(
 
         if (recipes) {
             // Rendering
-            SearchResultsView.renderResults(recipes, isClearRecipeContainer);
+            renderResultsController(recipes, isClearRecipeContainer);
 
             // Create URL
             const url = new URL(window.location.href);

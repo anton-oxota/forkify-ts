@@ -1,6 +1,6 @@
-import { bookmarksState } from "../modules/bookmarksModule";
 import { getRecipeById, recipeState } from "../modules/recipeModule";
 import RecipeView from "../views/RecipeView";
+import renderRecipeController from "./renderRecipeController";
 
 export default async function recipeController(recipeId: string) {
     if (!recipeId) return;
@@ -13,15 +13,8 @@ export default async function recipeController(recipeId: string) {
         const { recipe } = recipeState;
         if (!recipe) return;
 
-        // Check is bookmarked
-        const isBookmarked = !!bookmarksState.bookmarks.some(
-            (bookmarkedRecipe) => bookmarkedRecipe.id === recipe.id
-        );
-
-        recipe.isBookmarked = isBookmarked;
-
         // Render recipe
-        RecipeView.renderRecipe(recipe);
+        renderRecipeController(recipe);
     } catch (error) {
         if (error instanceof Error) {
             console.log("error");

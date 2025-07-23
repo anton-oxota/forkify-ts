@@ -1,5 +1,4 @@
 import type { Recipe } from "../modules/recipeModule";
-import { getURLRecipeId } from "../utils/url";
 import Components from "./Components";
 
 class BookmarksView {
@@ -18,15 +17,10 @@ class BookmarksView {
             return;
         }
 
-        const activeRecipeId = getURLRecipeId();
-
         bookmarksData.forEach((bookmarkData) => {
             this.bookmarksContainer.insertAdjacentHTML(
                 "beforeend",
-                Components.createResipeListElement(
-                    bookmarkData,
-                    bookmarkData.id === activeRecipeId
-                )
+                Components.createResipeListElement(bookmarkData)
             );
         });
     }

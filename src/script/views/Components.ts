@@ -37,8 +37,8 @@ class Components {
         `;
     }
 
-    public createResipeListElement(data: RecipeListData, isActive = false) {
-        const { id, image_url, publisher, title } = data;
+    public createResipeListElement(data: RecipeListData) {
+        const { id, image_url, publisher, title, isActive } = data;
 
         return `
                 <li class="preview">

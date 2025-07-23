@@ -14,8 +14,8 @@ class SearchResultsView {
 
     public searchForm = document.querySelector(".search") as HTMLFormElement;
 
-    private createResipeListElement(data: RecipeListData, isActive = false) {
-        const { id, image_url, publisher, title } = data;
+    private createResipeListElement(data: RecipeListData) {
+        const { id, image_url, publisher, title, isActive } = data;
 
         return `
             <li class="preview">
@@ -49,13 +49,14 @@ class SearchResultsView {
             );
 
         // Get Recipe Id
-        const recipeId = getURLRecipeId();
+        // const recipeId = getURLRecipeId();
 
         // Render Recipes
         data.forEach((recipe) => {
             this.recipesListContainer?.insertAdjacentHTML(
                 "beforeend",
-                this.createResipeListElement(recipe, recipe.id === recipeId)
+                Components.createResipeListElement(recipe)
+                // this.createResipeListElement(recipe)
             );
         });
     }

@@ -5,6 +5,7 @@ export type RecipeListData = {
     image_url: string;
     title: string;
     id: string;
+    isActive?: boolean;
 };
 
 type RecipeResults = {

@@ -3,6 +3,8 @@ import { searchResultsState } from "../modules/searchResultModule";
 import BookmarksView from "../views/BookmarksView";
 import SearchResultsView from "../views/SearchResultsView";
 import recipeController from "./recipeController";
+import renderBookmarksController from "./renderBookmarksController";
+import renderResultsController from "./renderResultsController";
 
 export default function selectRecipeController() {
     const recipeListContainer = SearchResultsView.recipesListContainer;
@@ -31,10 +33,10 @@ export default function selectRecipeController() {
 
             // Render active recipe in bookmark and result's list
             const { recipes } = searchResultsState;
-            if (recipes) SearchResultsView.renderResults(recipes);
+            if (recipes) renderResultsController(recipes);
 
             const { bookmarks } = bookmarksState;
-            if (bookmarks) BookmarksView.renderBookmarks(bookmarks);
+            if (bookmarks) renderBookmarksController(bookmarks);
         });
     });
 }
