@@ -13,19 +13,9 @@ class SearchResultsView {
 
     public searchForm = document.querySelector(".search") as HTMLFormElement;
 
-    public renderResults(
-        data: RecipeListData[],
-        isClearRecipeContainer = true
-    ) {
+    public renderResults(data: RecipeListData[]) {
         // Clear containers
         this.recipesListContainer.innerHTML = "";
-
-        if (isClearRecipeContainer) this.clearRecipeContainer();
-
-        if (!data.length)
-            this.recipeContainer.innerHTML = Components.error(
-                "No recipes found for your query. Please try again!"
-            );
 
         // Render Recipes
         data.forEach((recipe) => {
@@ -55,6 +45,13 @@ class SearchResultsView {
         this.recipesListContainer.innerHTML = "";
         container.innerHTML = "";
         container.innerHTML = Components.error(errorMessage);
+    }
+
+    public addSubmitHandler(handler: Function) {
+        this.searchForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            handler();
+        });
     }
 }
 

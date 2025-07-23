@@ -5,10 +5,7 @@ import {
 import SearchResultsView from "../views/SearchResultsView";
 import renderResultsController from "./renderResultsController";
 
-export default async function recipesListController(
-    searchValue: string,
-    isClearRecipeContainer = true
-) {
+export default async function recipesListController(searchValue: string) {
     try {
         // Loading
         SearchResultsView.renderLoading();
@@ -18,9 +15,14 @@ export default async function recipesListController(
 
         const { recipes } = searchResultsState;
 
+        if (!recipes?.length)
+            throw new Error(
+                "No recipes found for your query. Please try again!"
+            );
+
         if (recipes) {
             // Rendering
-            renderResultsController(recipes, isClearRecipeContainer);
+            renderResultsController(recipes);
 
             // Create URL
             const url = new URL(window.location.href);

@@ -10,7 +10,7 @@ export default async function pageLoadedController() {
     const search = url.searchParams.get("search");
     const recipeId = url.searchParams.get("recipe");
 
-    if (search) recipesListController(search, false);
+    if (search) recipesListController(search);
     if (recipeId) recipeController(recipeId);
 
     // Get bookmarks from localStorage

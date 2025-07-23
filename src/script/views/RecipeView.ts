@@ -2,7 +2,7 @@ import type { Recipe } from "../modules/recipeModule";
 import Components from "./Components";
 
 class RecipeView {
-    public recipeContainer = document.querySelector(
+    private recipeContainer = document.querySelector(
         ".recipe"
     ) as HTMLDivElement;
 
@@ -116,6 +116,19 @@ class RecipeView {
 
     public renderError(errorMessage: string) {
         this.recipeContainer.innerHTML = Components.error(errorMessage);
+    }
+
+    public addBookmarkHandler(handler: Function) {
+        this.recipeContainer.addEventListener("click", (event) => {
+            if (!event.target) return;
+
+            const target = event.target as Element;
+
+            // Targeting bookmark button
+            if (!target.closest(".btn-bookmark")) return;
+
+            handler();
+        });
     }
 }
 
