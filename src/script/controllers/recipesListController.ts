@@ -15,10 +15,11 @@ export default async function recipesListController(searchValue: string) {
 
         const { recipes } = searchResultsState;
 
-        if (!recipes?.length)
+        if (!recipes?.length) {
             throw new Error(
                 "No recipes found for your query. Please try again!"
             );
+        }
 
         if (recipes) {
             // Rendering

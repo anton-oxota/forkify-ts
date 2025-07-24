@@ -1,5 +1,7 @@
+import { paginationState, splitData } from "../modules/paginationModel";
 import type { RecipeListData } from "../modules/searchResultModule";
 import { getURLRecipeId } from "../utils/url";
+import PaginationView from "../views/PaginationView";
 import SearchResultsView from "../views/SearchResultsView";
 
 function renderResultsController(recipes: RecipeListData[]) {
@@ -8,7 +10,12 @@ function renderResultsController(recipes: RecipeListData[]) {
         recipeData.isActive = recipeId === recipeData.id;
     });
 
-    SearchResultsView.renderResults(recipes);
+    // Pagination
+    splitData(recipes, 10);
+    const { data, currentPage, totalPages } = paginationState;
+
+    SearchResultsView.renderResults(data[currentPage - 1]);
+    PaginationView.renderPageButtons(currentPage, totalPages);
 }
 
 export default renderResultsController;
