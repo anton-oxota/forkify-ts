@@ -3,7 +3,6 @@ import RecipeView from "../views/RecipeView";
 import renderRecipeController from "./renderRecipeController";
 
 export default async function recipeController(recipeId: string) {
-    if (!recipeId) return;
     try {
         RecipeView.renderLoading();
 
@@ -17,7 +16,6 @@ export default async function recipeController(recipeId: string) {
         renderRecipeController(recipe);
     } catch (error) {
         if (error instanceof Error) {
-            console.log("error");
             RecipeView.renderError(error.message);
         }
     }
