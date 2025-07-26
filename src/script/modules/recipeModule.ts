@@ -35,11 +35,17 @@ type RecipeFetch = {
 };
 
 async function getRecipeById(id: string) {
+    // Reset recipe
+    recipeState.recipe = null;
+
     try {
+        // Fetch recipe
         const data = await getData<RecipeFetch>(
             `${BASE_URL}/${id}`,
             "Sorry, can not get recipe"
         );
+
+        // Set recipe
         recipeState.recipe = data.data.recipe;
     } catch (error) {
         throw error;

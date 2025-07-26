@@ -5,6 +5,7 @@ import PaginationView from "../views/PaginationView";
 import SearchResultsView from "../views/SearchResultsView";
 
 function renderResultsController(recipes: RecipeListData[]) {
+    // Set active recipe
     const recipeId = getURLRecipeId();
     recipes.forEach((recipeData) => {
         recipeData.isActive = recipeId === recipeData.id;
@@ -14,7 +15,10 @@ function renderResultsController(recipes: RecipeListData[]) {
     splitData(recipes, 10);
     const { data, currentPage, totalPages } = paginationState;
 
+    // Render results
     SearchResultsView.renderResults(data[currentPage - 1]);
+
+    // Render pagination buttons
     PaginationView.renderPageButtons(currentPage, totalPages);
 }
 

@@ -21,17 +21,15 @@ export default async function recipesListController(searchValue: string) {
             );
         }
 
-        if (recipes) {
-            // Rendering
-            renderResultsController(recipes);
+        // Rendering
+        renderResultsController(recipes);
 
-            // Create URL
-            const url = new URL(window.location.href);
-            url.searchParams.set("search", searchValue);
+        // Create URL
+        const url = new URL(window.location.href);
+        url.searchParams.set("search", searchValue);
 
-            // Set Query
-            history.replaceState(null, "", url.href);
-        }
+        // Set Query
+        history.replaceState(null, "", url.href);
     } catch (error) {
         // Render Error
         if (error instanceof Error) {
