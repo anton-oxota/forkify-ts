@@ -17,6 +17,16 @@ class RecipeView {
         `;
     }
 
+    private createButtonServings(servings: number, type: "plus" | "minus") {
+        return `
+            <button class="btn--tiny btn--servings" data-servings='${servings}'>
+                <svg>
+                    <use href="imgs/icons.svg#icon-${type}-circle"></use>
+                </svg>
+            </button>
+        `;
+    }
+
     private createRecipeDetailsElement({
         cooking_time,
         servings,
@@ -39,16 +49,8 @@ class RecipeView {
                     <span class="recipe__info-text">servings</span>
 
                     <div class="recipe__info-buttons">
-                        <button class="btn--tiny btn--increase-servings">
-                            <svg>
-                                <use href="imgs/icons.svg#icon-minus-circle"></use>
-                            </svg>
-                        </button>
-                        <button class="btn--tiny btn--increase-servings">
-                            <svg>
-                                <use href="imgs/icons.svg#icon-plus-circle"></use>
-                            </svg>
-                        </button>
+                       ${this.createButtonServings(servings - 1, "minus")}
+                       ${this.createButtonServings(servings + 1, "plus")}
                     </div>
                 </div>
 
@@ -78,7 +80,11 @@ class RecipeView {
                     <svg class="recipe__icon">
                         <use href="imgs/icons.svg#icon-check"></use>
                     </svg>
-                    <div class="recipe__quantity">${quantity}</div>
+                    ${
+                        quantity
+                            ? `<div class="recipe__quantity">${quantity}</div>`
+                            : ""
+                    }                    
                     <div class="recipe__description">
                         <span class="recipe__unit">${unit}</span>
                         ${description}
@@ -110,6 +116,41 @@ class RecipeView {
         this.recipeContainer.innerHTML = this.createRecipeElement(recipeData);
     }
 
+    public renderRecipeDetails(recipeData: Recipe) {
+        const recipeDetailsElement =
+            this.recipeContainer.querySelector(".recipe__details");
+
+        if (!recipeDetailsElement) return;
+
+        const newRecipeDetailsElement =
+            this.createRecipeDetailsElement(recipeData);
+        recipeDetailsElement.insertAdjacentHTML(
+            "beforebegin",
+            newRecipeDetailsElement
+        );
+
+        // Delete old recipe details
+        recipeDetailsElement.remove();
+    }
+
+    public renderRecipeIngredients(recipeData: Recipe) {
+        const recipeIngredientsElement = this.recipeContainer.querySelector(
+            ".recipe__ingredients"
+        );
+
+        if (!recipeIngredientsElement) return;
+
+        const newRecipeIngredientsElement =
+            this.createRecipeIngredients(recipeData);
+        recipeIngredientsElement.insertAdjacentHTML(
+            "beforebegin",
+            newRecipeIngredientsElement
+        );
+
+        // Delete old recipe ingredients
+        recipeIngredientsElement.remove();
+    }
+
     public renderLoading() {
         this.recipeContainer.innerHTML = Components.spinner();
     }
@@ -128,6 +169,25 @@ class RecipeView {
             if (!target.closest(".btn-bookmark")) return;
 
             handler();
+        });
+    }
+
+    public addChangeServingsHandler(handler: Function) {
+        this.recipeContainer.addEventListener("click", (event) => {
+            const target = event.target as Element | null;
+            if (!target) return;
+
+            // Target servings button
+            const servingsButton = target.closest(
+                ".btn--servings"
+            ) as HTMLButtonElement | null;
+            if (!servingsButton) return;
+
+            // Get servings number
+            const servings = +servingsButton.dataset.servings!;
+            if (servings <= 0) return;
+
+            handler(servings);
         });
     }
 }
