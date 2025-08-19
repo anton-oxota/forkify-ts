@@ -93,7 +93,13 @@
     grid-column: 1/-1;
 }
 
-.upload__btn {
+/* .upload__btn {
     grid-column: 1 / -1;
     justify-self: center;
+} */
+
+.upload .action {
+    grid-column: 1 / -1;
+    justify-self: center;
+    font-size: 30px;
 }

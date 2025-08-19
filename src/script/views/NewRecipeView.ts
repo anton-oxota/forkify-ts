@@ -1,3 +1,5 @@
+import Components from "./Components";
+
 class NewRecipeView {
     private openNewRecipeButton = document.querySelector(
         ".nav__btn--add-recipe"
@@ -16,6 +18,9 @@ class NewRecipeView {
     ) as HTMLDivElement;
 
     public newRecipeForm = document.querySelector(".upload") as HTMLFormElement;
+    private formActionContainer = this.newRecipeForm.querySelector(
+        ".action"
+    ) as HTMLDivElement;
 
     constructor() {
         this.openNewRecipeButton.addEventListener(
@@ -29,6 +34,17 @@ class NewRecipeView {
         );
     }
 
+    private createSubmitButton() {
+        return `
+            <button class="btn upload__btn">
+                <svg>
+                    <use href="imgs/icons.svg#icon-upload-cloud"></use>
+                </svg>
+                <span>Upload</span>
+            </button>
+        `;
+    }
+
     private openNewRecipe() {
         this.newRecipeOverlay.classList.remove("hidden");
         this.newRecipeWindow.classList.remove("hidden");
@@ -37,6 +53,18 @@ class NewRecipeView {
     private closeNewRecipe() {
         this.newRecipeOverlay.classList.add("hidden");
         this.newRecipeWindow.classList.add("hidden");
+    }
+
+    public renderMessage(message: string) {
+        this.formActionContainer.innerHTML = message;
+    }
+
+    public renderError(errorMessage: string) {
+        this.formActionContainer.innerHTML = errorMessage;
+    }
+
+    public renderSubmitButton() {
+        this.formActionContainer.innerHTML = this.createSubmitButton();
     }
 
     public addUploadRecipeHandler(handler: Function) {
