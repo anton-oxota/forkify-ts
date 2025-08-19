@@ -11,6 +11,7 @@ export type Recipe = {
     id: string;
     isBookmarked?: boolean;
     isActive?: boolean;
+    key?: string;
 };
 
 type RecipeIngredient = {

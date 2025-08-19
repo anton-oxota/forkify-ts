@@ -1,5 +1,3 @@
-import Components from "./Components";
-
 class NewRecipeView {
     private openNewRecipeButton = document.querySelector(
         ".nav__btn--add-recipe"
