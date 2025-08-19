@@ -1,3 +1,4 @@
+import { paginationState } from "../modules/paginationModel";
 import SearchResultsView from "../views/SearchResultsView";
 import recipesListController from "./recipesListController";
 
@@ -8,6 +9,9 @@ export default async function searchResultsController() {
     const searchValue = searchInput.value.trim();
 
     if (!searchValue) return;
+
+    // Reset current page
+    paginationState.currentPage = 1;
 
     recipesListController(searchValue);
 }

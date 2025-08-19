@@ -11,6 +11,10 @@ class SearchResultsView {
         ".recipe"
     ) as HTMLDivElement;
 
+    private paginationContainer = document.querySelector(
+        ".pagination"
+    ) as HTMLDivElement;
+
     public searchForm = document.querySelector(".search") as HTMLFormElement;
 
     public renderResults(data: RecipeListData[]) {
@@ -32,16 +36,19 @@ class SearchResultsView {
             this.recipeContainer.querySelector(".error")
         ) {
             this.recipeContainer.innerHTML = "";
+            this.paginationContainer.innerHTML = "";
         }
     }
 
     public renderLoading(container = this.recipesListContainer) {
+        this.paginationContainer.innerHTML = "";
         container.innerHTML = "";
         container.innerHTML = Components.spinner();
         this.clearRecipeContainer();
     }
 
     public renderError(errorMessage: string, container = this.recipeContainer) {
+        this.clearRecipeContainer();
         this.recipesListContainer.innerHTML = "";
         container.innerHTML = "";
         container.innerHTML = Components.error(errorMessage);
