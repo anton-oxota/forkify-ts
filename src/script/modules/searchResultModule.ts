@@ -1,4 +1,4 @@
-import { BASE_URL, getData } from "../utils/getData";
+import { API_KEY, BASE_URL, getData } from "../utils/http";
 
 export type RecipeListData = {
     publisher: string;
@@ -33,7 +33,7 @@ const searchResultsState: SearchResultsState = {
 async function getRecipesByName(name: string) {
     try {
         const data = await getData<RecipeResults>(
-            `${BASE_URL}?search=${name}`,
+            `${BASE_URL}?search=${name}&key=${API_KEY}`,
             `Sorry, something went wrong`
         );
         searchResultsState.recipes = data.data.recipes;

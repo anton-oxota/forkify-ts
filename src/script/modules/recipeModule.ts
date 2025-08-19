@@ -1,4 +1,4 @@
-import { BASE_URL, getData } from "../utils/getData";
+import { BASE_URL, getData } from "../utils/http";
 
 export type Recipe = {
     publisher: string;

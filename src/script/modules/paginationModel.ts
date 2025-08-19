@@ -12,6 +12,8 @@ const paginationState: PaginationState<RecipeListData> = {
     data: [],
 };
 
+export const RECIPES_PER_PAGE = 10;
+
 function splitData(data: RecipeListData[], quantity: number) {
     const copy = structuredClone(data);
     const totalPages = Math.ceil(data.length / quantity);
