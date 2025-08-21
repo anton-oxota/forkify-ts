@@ -1,9 +1,11 @@
+import { bookmarksState, toggleBookmark } from "../modules/bookmarksModule";
 import {
     createUploadRecipeData,
     uploadRecipe,
 } from "../modules/uploadRecipeModule";
 import Components from "../views/Components";
 import NewRecipeView from "../views/NewRecipeView";
+import renderBookmarksController from "./renderBookmarksController";
 
 async function uploadRecipeController() {
     const form = NewRecipeView.newRecipeForm;
@@ -14,8 +16,13 @@ async function uploadRecipeController() {
 
     // Uploading
     try {
-        await uploadRecipe(uploadRecipeData);
+        const recipe = await uploadRecipe(uploadRecipeData);
         NewRecipeView.renderMessage("Upload Succeed");
+
+        // Set uploaded recipe as bookmarked
+        toggleBookmark(recipe.data.recipe);
+        // Render bookmarks
+        renderBookmarksController(bookmarksState.bookmarks);
 
         setTimeout(() => {
             NewRecipeView.renderSubmitButton();

@@ -51,11 +51,35 @@
 .upload__column {
     display: grid;
     grid-template-columns: 1fr 2.8fr;
-    align-items: center;
+    /* align-items: center; */
+    align-items: start;
     gap: 1.5rem;
 }
 
+.upload__column.ingredients,
+.ingredients-wrapper {
+    /* grid-template-columns: 1fr; */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ingredient-item {
+    display: grid;
+    grid-template-columns: 1fr 2.8fr auto;
+    gap: 1.5rem;
+}
+
+.ingredient-item button {
+    padding: 10px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .upload__column label {
+    width: max-content;
     font-size: 1.5rem;
     font-weight: 600;
     color: inherit;
@@ -79,7 +103,7 @@
     background-color: var(--color-grey-light-1);
 }
 
-.upload__column button {
+.upload__btn {
     grid-column: 1 / span 2;
     justify-self: center;
     margin-top: 1rem;

@@ -1,5 +1,6 @@
 import { bookmarksState } from "../modules/bookmarksModule";
 import { searchResultsState } from "../modules/searchResultModule";
+import { getURLRecipeId } from "../utils/url";
 import BookmarksView from "../views/BookmarksView";
 import SearchResultsView from "../views/SearchResultsView";
 import recipeController from "./recipeController";
@@ -21,7 +22,8 @@ export default function selectRecipeController() {
 
             // Get recipe ID
             const recipeId = recipeLinkElement?.dataset.id;
-            if (!recipeId) return;
+            const currentsURLRecipeID = getURLRecipeId();
+            if (!recipeId || currentsURLRecipeID === recipeId) return;
 
             // Set URL
             const url = new URL(window.location.href);

@@ -89,6 +89,11 @@
     transform: translateY(-1px);
 }
 
+.recipe__action {
+    display: flex;
+    margin-left: auto;
+}
+
 .recipe__user-generated {
     background-color: #eeeae8;
     display: flex;

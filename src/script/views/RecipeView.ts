@@ -31,6 +31,7 @@ class RecipeView {
         cooking_time,
         servings,
         isBookmarked,
+        key,
     }: Recipe) {
         return `
             <div class="recipe__details">
@@ -54,18 +55,27 @@ class RecipeView {
                     </div>
                 </div>
 
-                <div class="recipe__user-generated">
-                    <svg>
-                        <use href="imgs/icons.svg#icon-user"></use>
-                    </svg>
-                </div>
-                <button class="btn--round btn-bookmark">
-                    <svg class="">
-                        <use href="imgs/icons.svg#icon-bookmark${
-                            isBookmarked ? "-fill" : ""
-                        }"></use>
-                    </svg>
-                </button>
+                <div class="recipe__action">
+                    ${
+                        key
+                            ? `
+                        <div class="recipe__user-generated">
+                            <svg>
+                                <use href="imgs/icons.svg#icon-user"></use>
+                            </svg>
+                        </div>
+                        `
+                            : ""
+                    }
+                            
+                    <button class="btn--round btn-bookmark">
+                        <svg class="">
+                            <use href="imgs/icons.svg#icon-bookmark${
+                                isBookmarked ? "-fill" : ""
+                            }"></use>
+                        </svg>
+                    </button>
+                </div>                
             </div>
         `;
     }

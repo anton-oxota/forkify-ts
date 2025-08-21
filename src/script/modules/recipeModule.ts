@@ -14,10 +14,10 @@ export type Recipe = {
     key?: string;
 };
 
-type RecipeIngredient = {
+export type RecipeIngredient = {
     quantity: number | null;
-    unit: string;
-    description: string;
+    unit: string | null;
+    description: string | null;
 };
 
 type RecipeState = {

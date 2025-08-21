@@ -11,6 +11,7 @@ import PaginationView from "./views/PaginationView";
 import RecipeView from "./views/RecipeView";
 import SearchResultsView from "./views/SearchResultsView";
 import NewRecipeView from "./views/NewRecipeView";
+import newRecipeIngredientsController from "./controllers/newRecipeIngredientsController";
 
 function init() {
     pageLoadedController();
@@ -20,6 +21,7 @@ function init() {
     RecipeView.addChangeServingsHandler(servingsController);
     PaginationView.addPageClickHandler(paginationController);
     NewRecipeView.addUploadRecipeHandler(uploadRecipeController);
+    newRecipeIngredientsController();
 }
 
 init();

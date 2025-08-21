@@ -25,7 +25,14 @@ function createUploadRecipeData(form: HTMLFormElement) {
     return recipeData;
 }
 
-async function uploadRecipe(data: UploadRecipe) {
+type UploadRecipeResponse = {
+    status: "string";
+    data: {
+        recipe: Recipe;
+    };
+};
+
+async function uploadRecipe(data: UploadRecipe): Promise<UploadRecipeResponse> {
     try {
         const result = await postData(
             `${BASE_URL}?key=${API_KEY}`,
