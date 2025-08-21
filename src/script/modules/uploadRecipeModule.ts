@@ -1,5 +1,5 @@
 import { API_KEY, BASE_URL, postData } from "../utils/http";
-import type { Recipe } from "./recipeModule";
+import type { Recipe, RecipeIngredient } from "./recipeModule";
 
 type UploadRecipe = Omit<Recipe, "isActive" | "id" | "isBookmarked"> | null;
 
@@ -11,6 +11,27 @@ const uploadRecipeState: UploadRecipeState = {
     recipe: null,
 };
 
+function createUploadERcipeIngredients(form: HTMLFormElement) {
+    const ingredientInputs = form.querySelectorAll("input[name^=ingredient]");
+
+    let ingredients: RecipeIngredient[] = [];
+
+    Array.from(ingredientInputs).forEach((ingredient) => {
+        const ingredientInput = ingredient as HTMLInputElement;
+
+        const [quantity = null, unit = null, description = null] =
+            ingredientInput.value.split(",");
+
+        ingredients.push({
+            quantity: quantity ? +quantity : null,
+            unit,
+            description,
+        });
+    });
+
+    return ingredients;
+}
+
 function createUploadRecipeData(form: HTMLFormElement) {
     const recipeData: UploadRecipe = {
         title: form.recipeTitle.value,
@@ -19,7 +40,7 @@ function createUploadRecipeData(form: HTMLFormElement) {
         publisher: form.publisher.value,
         cooking_time: form.cookingTime.value,
         servings: form.servings.value,
-        ingredients: [],
+        ingredients: createUploadERcipeIngredients(form),
     };
 
     return recipeData;

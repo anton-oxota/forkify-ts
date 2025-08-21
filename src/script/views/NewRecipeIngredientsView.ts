@@ -12,6 +12,7 @@ class NewRecipeIngredientsView {
             <div class="ingredient-item">
                 <label>Ingredient ${ingredientNumber}</label>
                 <input
+                    data-ingredient="${ingredientNumber}"
                     type="text"
                     required
                     name="ingredient-${ingredientNumber}"
