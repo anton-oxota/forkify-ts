@@ -1,9 +1,13 @@
 type NewRecipeIngredientsState = {
-    ingredientsQuantity: number;
+    ingredientValues: string[];
 };
 
 const newRecipeIngredientsState: NewRecipeIngredientsState = {
-    ingredientsQuantity: 1,
+    ingredientValues: [""],
 };
 
-export { newRecipeIngredientsState };
+function deleteRecipeIngredient(deleteRecipeIndex: number) {
+    newRecipeIngredientsState.ingredientValues.splice(deleteRecipeIndex, 1);
+}
+
+export { newRecipeIngredientsState, deleteRecipeIngredient };
