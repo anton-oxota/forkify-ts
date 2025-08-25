@@ -11,6 +11,12 @@ It demonstrates advanced JavaScript concepts like asynchronous programming, modu
 
 ---
 
+## 📖 Live Demo
+
+https://anton-forkify-ts.netlify.app/
+
+---
+
 ## ✨ Features
 
 -   🔍 **Search Recipes** — Find recipes by keyword using live API calls
@@ -25,7 +31,7 @@ It demonstrates advanced JavaScript concepts like asynchronous programming, modu
 
 ## 🛠 Technologies Used
 
--   **Language:** JavaScript (ES6+)
+-   **Language:** TypeScript
 -   **Build Tool:** Vite
 -   **Styling:** CSS
 -   **API:** Forkify API (with API key support)
