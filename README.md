@@ -13,7 +13,7 @@ It demonstrates advanced JavaScript concepts like asynchronous programming, modu
 
 ## 📖 Live Demo
 
-https://anton-forkify-ts.netlify.app/
+https://ao-forkify-ts.netlify.app/
 
 ---
 
